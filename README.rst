@@ -24,5 +24,5 @@ Features
 
 Notes
 --------
-* All the services (mongodb,nginx and uwsgi) are running in the same container due to time restrictions
+* All the services (postgres,nginx and uwsgi) are running in the same container due to time restrictions
 * Unit tests and production uses different databases , they are configured via an env varable

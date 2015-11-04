@@ -19,9 +19,9 @@ RUN apt-get update && apt-get -y install \
   uwsgi-plugin-python
 
 RUN mkdir /var/data
-RUN git clone git://github.com/gpisacco/my_sequencer.git /var/data/my_sequencer #redo
-RUN chmod 755 /var/data/my_sequencer/scripts/config.sh
+RUN git clone git://github.com/gpisacco/hype_test.git /var/data/hype #redo
+RUN chmod 755 /var/data/hype/scripts/config.sh
 
 EXPOSE 80
 
-CMD /var/data/my_sequencer/scripts/config.sh
+CMD /var/data/hype/scripts/config.sh

@@ -7,6 +7,9 @@ virtualenv env
 source env/bin/activate
 pip install -r ../requirements.txt
 
+cd ../web
+bower install
+
 # let www-data user access the site
 sudo chown -R  www-data /var/data/hype
 
@@ -29,6 +32,7 @@ sudo rm /etc/nginx/sites-enabled/default
 # nginx config
 sudo cp hype.ini /etc/uwsgi/apps-enabled/
 sleep 10
+sudo service postgresql start
 sudo service uwsgi start
 sudo service nginx start
 tail -f /var/log/lastlog #ugly way to avoid configuring supervidord
