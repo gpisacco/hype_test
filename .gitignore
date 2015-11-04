@@ -1,0 +1,10 @@
+/.idea/
+/.Python
+/api/__pycache__/
+/web/bower_components/
+/web/plugins/
+*.pyc
+/bin/
+/include/
+/lib/
+/local/
