@@ -1,5 +1,5 @@
 (function($) {
-    var apiUrl = '../';
+    var apiUrl = 'http://localhost:5000';
     getCookie = function (cname)	{
         var name = cname  +  "=";
         var ca = document.cookie.split(';');

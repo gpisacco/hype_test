@@ -39,18 +39,7 @@
                     </thead>
                     <tbody>
                     <!-- Start: list_row -->
-                        <tr>
-                            <td>1</td>
-                            <td>Carlos Slim Helu & family</td>
-                            <td>
-                                <div class="checkbox-inline" style=" padding-bottom: 23px;">
-                                    <label >
-                                        <input type="checkbox" checked="">
-                                        <i class="fa fa-square-o"></i>
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
+                        
                     <!-- End: list_row -->
                     </tbody>
                     <tfoot>
@@ -68,10 +57,9 @@
 <script type="text/javascript">
 // Run Datables plugin and create 3 variants of settings
 function AllTables(){
-    console.log(document.Users.list(function(results){
-        console.log(results);
-        SelectVehiclesTable();
-    }));
+    
+    SelectVehiclesTable();
+    
 }
 $(document).ready(function() {
     AllTables();
