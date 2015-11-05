@@ -23,7 +23,7 @@ sudo chown -R  www-data /var/data/hype
 
 cd ../scripts
 sudo service postgresql restart
-
+sleep 10
 #postgres production configuration
 sudo -u postgres psql -c "CREATE DATABASE hype_prod;"
 sudo -u postgres psql -c "CREATE USER hype WITH PASSWORD 'passw0rd';"

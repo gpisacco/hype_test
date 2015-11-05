@@ -49,8 +49,11 @@ class BaseList(Resource):
             sqa_args = {}
             for a in args:
                 sqa_args[a] = args[a]
-                
-            user = self.get_entity().filter_by(**(sqa_args)).all()
+
+            if (len(args) == 0):
+                user =  self.get_entity().all()
+            else:
+                user = self.get_entity().filter_by(**(sqa_args)).all()
             return rows2dict(user)
         except Exception as e:
             abort(500, message=str(e))
@@ -83,17 +86,22 @@ class UsersList(BaseList):
             args = request.args
             sqa_args = {}
             vehicles_filter = {}
+            #this parts takes care of transforming
+            #parameters in sqlalchemy friendly dicts
             for a in args:
                 if ('vehicles' in a):
                     vehicles_filter[a.split('.')[1]] = args[a]
                     continue
                     
                 sqa_args[a] = args[a]
-                
+            
+            #if there is "composite" filter
             if (len(vehicles_filter) > 0) :
                 user = db.users.filter_by(**(sqa_args)).\
                 join(db.users.objects).\
                 filter_by(**(vehicles_filter)).all()
+            elif (len(args) == 0) :
+                user =  db.users.all()
             else :
                 user =  db.users.filter_by(**(sqa_args)).all()
             return rows2dict(user)
@@ -137,13 +145,14 @@ class VehiclesList(BaseList):
                 if ('users' in a):
                     user_filter[a.split('.')[1]] = args[a]
                     continue
-                    
                 sqa_args[a] = args[a]
                 
             if (len(user_filter) > 0) :
                 user = db.objects.filter_by(**(sqa_args)).\
                 join(db.objects.users).\
                 filter_by(**(user_filter)).all()
+            elif (len(args) == 0):
+                user =  db.objects.all()
             else :
                 user =  db.objects.filter_by(**(sqa_args)).all()
             return rows2dict(user)
