@@ -56,7 +56,7 @@ def test_create_providers(client):
         
 def test_create_objects(client):
     
-    for i in range(20,30):
+    for i in range(20,23):
         user = {
             "login": "user-a" + str(i),
             "password": "pass-a" + str(i),
@@ -65,9 +65,8 @@ def test_create_objects(client):
         user_resp = client.post("/users",
                                    data=json.dumps(user),
                                    headers={"content-type":"application/json"})
-                                   
-        user_id = json.loads(user_resp.data)["nid"]
         
+        user_id = json.loads(user_resp.data)["nid"]
         
         prov = {
             "name": "provider" + str(i)
@@ -75,20 +74,22 @@ def test_create_objects(client):
         prov_resp = client.post("/providers",
                                    data=json.dumps(prov),
                                    headers={"content-type":"application/json"})
+        
         prov_id = json.loads(prov_resp.data)["nid"]
         
-        for v in range(0,10):
+        for v in range(0,3):
             vehicle = {
                 "name": "vehicle" + str(i) + str(v),
                 "provider_id": prov_id,
-                "active": True
+                "active": True,
+                "users1" : user_id
                 
             }
             veh_resp = client.post("/vehicles",
                                        data=json.dumps(vehicle),
                                        headers={"content-type":"application/json"})
+
             veh_get_resp = client.get("/vehicles/"+json.loads(veh_resp.data)["nid"])
-        
             name =  json.loads(veh_get_resp.data)['name']
             assert(name == "vehicle" + str(i) + str(v))
 

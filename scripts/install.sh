@@ -31,7 +31,7 @@ sudo -u postgres psql -c "CREATE USER hype_test WITH PASSWORD 'passw0rd';"
 sudo -u postgres psql -d hype_test -c "CREATE SCHEMA lbs2 AUTHORIZATION hype_test;"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE hype_test TO hype_test;"
 sudo -u postgres psql -d hype_test -c "ALTER DEFAULT PRIVILEGES IN SCHEMA lbs2 GRANT ALL PRIVILEGES ON tables TO hype_test;"
-sudo -u postgres psql -d hype_test -a -f scripts/schema.sql
+sudo -u postgres psql -d hype_test -a -f schema.sql
 sudo -u postgres psql -d hype_test -c " GRANT SELECT, USAGE  ON ALL SEQUENCES IN SCHEMA lbs2 TO hype_test;"
 
 # nginx config

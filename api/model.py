@@ -2,6 +2,8 @@ import sqlsoup
 import os
 import ConfigParser
 import io
+from sqlalchemy.orm import backref
+
 
 
 config = ConfigParser.RawConfigParser(allow_no_value=True)
@@ -21,3 +23,10 @@ ct = "postgresql://{}:{}@{}/{}"
 cs = ct.format(PG_USER,PG_PASS,PG_HOST,PG_DBNAME)
 db  = sqlsoup.SQLSoup(cs)
 db.schema = "lbs2"
+
+db.objects.relate('users', db.users, secondary=db.object2user._table, 
+    primaryjoin=db.objects.nid == db.object2user.object_id, 
+    secondaryjoin=db.object2user.user_id == db.users.nid , 
+    foreign_keys=[db.object2user.user_id, 
+                  db.object2user.object_id])
+db.users.relate('objects', db.objects, secondary=db.object2user._table)

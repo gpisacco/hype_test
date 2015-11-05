@@ -46,6 +46,7 @@ CREATE TABLE lbs2.objects
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT uq_objects_id UNIQUE (nid),
   CONSTRAINT uq_objects_name UNIQUE (name)
+  
 )
 WITH (
   OIDS=FALSE
@@ -60,7 +61,9 @@ CREATE TABLE lbs2.object2user
       ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT fk_object2user_users FOREIGN KEY (user_id)
       REFERENCES lbs2.users (nid) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE CASCADE
+      ON UPDATE NO ACTION ON DELETE CASCADE,
+  CONSTRAINT pk_object2user PRIMARY KEY (user_id, object_id)
+  
 )
 WITH (
   OIDS=FALSE
