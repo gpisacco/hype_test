@@ -13,7 +13,7 @@ cd ../web
 #node is installed as root here to avoid complex docker
 
 curl -sL https://deb.nodesource.com/setup | sudo bash -
-sudo apt-get install -y nodejs npm
+sudo apt-get install -y nodejs
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 npm install bower
 node_modules/.bin/bower -y install --allow-root
@@ -49,7 +49,7 @@ sudo rm /etc/nginx/sites-enabled/default
 # nginx config
 sudo cp hype.ini /etc/uwsgi/apps-enabled/
 sleep 10
-sudo service postgresql start
+sudo service postgresql restart
 sudo service uwsgi start
 sudo service nginx start
 tail -f /var/log/lastlog #ugly way to avoid configuring supervidord

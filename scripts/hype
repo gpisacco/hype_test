@@ -20,8 +20,8 @@ server {
         include     /var/data/hype/scripts/uwsgi_params;
     }
     
-    location /static/ {
-        root /var/data/hype/web
+    location /web/ {
+        root /var/data/hype;
         index index.html;
     }
 
