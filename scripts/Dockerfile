@@ -5,6 +5,7 @@ MAINTAINER Gaston Pisacco
 RUN sed -i "s/exit 101/exit 0/g" /usr/sbin/policy-rc.d
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
 RUN apt-get update && apt-get -y install \
+  curl \
   gcc \
   git \
   postgresql \

@@ -7,8 +7,16 @@ virtualenv env
 source env/bin/activate
 pip install -r ../requirements.txt
 
+
+
 cd ../web
-bower install
+#node is installed as root here to avoid complex docker
+
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+sudo apt-get install -y nodejs npm
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+npm install bower
+node_modules/.bin/bower -y install --allow-root
 
 # let www-data user access the site
 sudo chown -R  www-data /var/data/hype

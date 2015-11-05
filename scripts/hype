@@ -21,7 +21,8 @@ server {
     }
     
     location /static/ {
-        root /var/data/hype/web;
+        root /var/data/hype/web
+        index index.html;
     }
 
 }
