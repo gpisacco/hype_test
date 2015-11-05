@@ -25,4 +25,4 @@ RUN chmod 755 /var/data/hype/scripts/config.sh
 
 EXPOSE 80
 
-CMD /var/data/hype/scripts/config.sh
+CMD /var/data/hype/scripts/config.sh > /tmp/cfg.log

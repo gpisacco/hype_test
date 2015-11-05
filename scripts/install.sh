@@ -16,12 +16,13 @@ curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install -y nodejs
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 npm install bower
-node_modules/.bin/bower -y install --allow-root
+node_modules/.bin/bower --config.interactive=false install --allow-root
 
 # let www-data user access the site
 sudo chown -R  www-data /var/data/hype
 
 cd ../scripts
+sudo service postgresql restart
 
 #postgres production configuration
 sudo -u postgres psql -c "CREATE DATABASE hype_prod;"
@@ -49,7 +50,7 @@ sudo rm /etc/nginx/sites-enabled/default
 # nginx config
 sudo cp hype.ini /etc/uwsgi/apps-enabled/
 sleep 10
-sudo service postgresql restart
 sudo service uwsgi start
 sudo service nginx start
+/var/data/hype/scripts/run_test.sh
 tail -f /var/log/lastlog #ugly way to avoid configuring supervidord
