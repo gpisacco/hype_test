@@ -2,10 +2,16 @@
 
 from flask import Flask, request
 from flask_restful import  Api
+from flask.ext.cors import CORS
+
 from rest import Users, Providers, Vehicles, UsersList, ProvidersList, VehiclesList
 
 app = Flask(__name__)
 api = Api(app)
+
+# CORS package
+app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 api.add_resource(Users, '/users/<int:key_id>')
 api.add_resource(UsersList, '/users')
